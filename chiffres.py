@@ -40,7 +40,8 @@ def number_to_lcd(number: int) -> str:
         9: [" _ ", "|_|", " _|"],
     }
     
-    number_str = str(abs(number))  # Handle negative numbers
+    # Handle negative numbers
+    number_str = str(abs(number))
     result = []
     
     for row in range(3):

@@ -52,5 +52,4 @@ def number_to_lcd(number: int) -> str:
 
 
 if __name__ == "__main__":
-    # print(number_to_lcd(1234567890))
     print(number_to_lcd(5168937425))

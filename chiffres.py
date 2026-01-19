@@ -24,57 +24,32 @@ def number_to_lcd(number: int) -> str:
         number (int): number to be displayed
 
     Returns:
-        str: string
+        str: string representation of the number in LCD format
     """
-    # each key of the dictionary corresponds to a line of the lcd display
-    chiffres = {
-        0: {
-            0: " _ ",
-            1: "   ",
-            2: " _ ",
-            3: " _ ",
-            4: "   ",
-            5: " _ ",
-            6: " _ ",
-            7: " _ ",
-            8: " _ ",
-            9: " _ ",
-        },
-        1: {
-            0: "| |",
-            1: "  |",
-            2: " _|",
-            3: " _|",
-            4: "|_|",
-            5: "|_ ",
-            6: "|_ ",
-            7: "  |",
-            8: "|_|",
-            9: "|_|",
-        },
-        2: {
-            0: "|_|",
-            1: "  |",
-            2: "|_ ",
-            3: " _|",
-            4: "  |",
-            5: " _|",
-            6: "|_|",
-            7: "  |",
-            8: "|_|",
-            9: " _|",
-        },
-    }    
-
-    result = ""
-    number_str = str(number)
-    for niv in range(3):
-        for x in number_str:
-            result += chiffres[niv][int(x)]
-        result += "\n"
-
-    return result
+    # LCD display patterns for each digit (3 rows)
+    lcd_patterns = {
+        0: [" _ ", "| |", "|_|"],
+        1: ["   ", "  |", "  |"],
+        2: [" _ ", " _|", "|_ "],
+        3: [" _ ", " _|", " _|"],
+        4: ["   ", "|_|", "  |"],
+        5: [" _ ", "|_ ", " _|"],
+        6: [" _ ", "|_ ", "|_|"],
+        7: [" _ ", "  |", "  |"],
+        8: [" _ ", "|_|", "|_|"],
+        9: [" _ ", "|_|", " _|"],
+    }
+    
+    number_str = str(abs(number))  # Handle negative numbers
+    result = []
+    
+    for row in range(3):
+        line = "".join(lcd_patterns[int(digit)][row] for digit in number_str)
+        result.append(line)
+    
+    return "\n".join(result)
 
 
 if __name__ == "__main__":
-    print(number_to_lcd(1234567890))
+    # print(number_to_lcd(1234567890))
+    print(number_to_lcd(5168937425))

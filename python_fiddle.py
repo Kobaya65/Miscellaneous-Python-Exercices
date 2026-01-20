@@ -12,6 +12,7 @@ def main() -> None:
 
     print(fibonacci)
 
+
 def add(*args) -> float | int:
     """Adds an arbitrary number of arguments together and returns the sum.
     https://python-fiddle.com/challenges/add-args
@@ -26,6 +27,7 @@ def add(*args) -> float | int:
         somme += arg
 
     return somme
+
 
 def find_substring(strings: list[str], substring: str) -> bool:
     """Check if a substring is present in any string within a list.
@@ -45,6 +47,7 @@ def find_substring(strings: list[str], substring: str) -> bool:
 
     return result
 
+
 def ascii_value(char: str) -> int:
     """Returns the ASCII value of the given character.
     https://python-fiddle.com/challenges/ascii-value-of-character
@@ -57,6 +60,7 @@ def ascii_value(char: str) -> int:
     res = ord(char)
 
     return res
+
 
 def capital_words_spaces(input_string: str) -> str:
     """Insert spaces between words starting with capital letters in the given string.
@@ -82,6 +86,7 @@ def capital_words_spaces(input_string: str) -> str:
 
     return res
 
+
 def create_csv_file() -> None:
     """Create a csv file to be used in extract_column_from_csv().
     """
@@ -97,6 +102,7 @@ def create_csv_file() -> None:
 
     del os.path
     del csv
+
 
 def extract_column_from_csv(file_path: str, column_names: list[str]) -> list[dict]:
     """https://python-fiddle.com/challenges/csv-dict
@@ -119,6 +125,7 @@ def extract_column_from_csv(file_path: str, column_names: list[str]) -> list[dic
     
     return column_data
 
+
 def map_folium() -> None:
     """https://python-fiddle.com/tutorials/folium"""
     import folium
@@ -136,6 +143,7 @@ def map_folium() -> None:
     # Display the map
     m.save("map_Poitiers_Couronneries.html")
     m.show_in_browser()
+
 
 def get_adjacent_coordinates(coord: tuple[int, int]) -> list[tuple[int, int]]:
     """Get all adjacent coordinates of a given coordinate.
@@ -163,6 +171,7 @@ def get_adjacent_coordinates(coord: tuple[int, int]) -> list[tuple[int, int]]:
 
     return sorted(adjacent_coords)
 
+
 def check_consecutive(lst: list) -> bool:
     """Check if the given list contains consecutive numbers.
     https://python-fiddle.com/challenges/check-consecutive-numbers
@@ -181,6 +190,7 @@ def check_consecutive(lst: list) -> bool:
 
     return consecutive
 
+
 def check_integer(text: str) -> bool:
     """Check if the given string represents a valid integer.
     https://python-fiddle.com/challenges/check-if-string-is-integer
@@ -190,7 +200,7 @@ def check_integer(text: str) -> bool:
     Returns:
         bool: True if the string is a valid integer, False otherwise.
     """
-    # Strip any leading or trailing whitespace
+    # strip any leading or trailing whitespace
     text = text.strip()
     try:
         _ = int(text)
@@ -199,6 +209,7 @@ def check_integer(text: str) -> bool:
         res = False
 
     return res 
+
 
 def opposite_signs(x: int, y: int) -> bool:
     """Check if two integers have opposite signs.
@@ -217,6 +228,7 @@ def opposite_signs(x: int, y: int) -> bool:
 
     return res
 
+
 def is_perfect_square(n: int) -> bool:
     """Determine if the given number is a perfect square.
 
@@ -229,7 +241,9 @@ def is_perfect_square(n: int) -> bool:
 
     if sqrt(n).is_integer():
         return True
+
     return False
+
 
 def convert_list_dictionary(l1: list, l2: list, l3: list) -> list[dict]:
     """Convert three lists into a list of nested dictionaries.
@@ -246,7 +260,9 @@ def convert_list_dictionary(l1: list, l2: list, l3: list) -> list[dict]:
     res = []
     for i in range(len(l1)):
         res.append({l1[i]: {l2[i]: l3[i]}})
+
     return res
+
 
 def check_char(string: str) -> str:
     """Check if the given string starts and ends with the same character.

@@ -43,11 +43,12 @@ def number_to_lcd(number: int) -> str:
     # Handle negative numbers
     number_str = str(abs(number))
     result = []
-    
+
     for row in range(3):
         line = "".join(lcd_patterns[int(digit)][row] for digit in number_str)
         result.append(line)
-    
+    result.append("\n")
+
     return "\n".join(result)
 
 

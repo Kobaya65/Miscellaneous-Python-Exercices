@@ -272,10 +272,10 @@ def check_char(string: str) -> str:
     Returns:
         str: "Valid" if the string starts and ends with the same character, "Invalid" otherwise.
     """
-    return ("Valid" if (string[0] == string[-1]) else "Invalid")
+    return "Valid" if (string[0] == string[-1]) else "Invalid"
 
 
 if __name__ == "__main__":
-    print(check_char("abba"))  # Output: "Valid"
-    print(check_char("a"))     # Output: "Valid"
-    print(check_char("abcd"))  # Output: "Invalid"
+    print(check_char("abba"))
+    print(check_char("a"))
+    print(check_char("abcd"))

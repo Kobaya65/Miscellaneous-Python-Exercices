@@ -275,6 +275,7 @@ def check_char(string: str) -> str:
     return "Valid" if (string[0] == string[-1]) else "Invalid"
 
 
+
 def create_diamond(motif: str, largeur: int) -> str:
     """Build a diamond with a given character and a given size.
 
@@ -285,16 +286,21 @@ def create_diamond(motif: str, largeur: int) -> str:
     Returns:
         str: the diamond as a string
     """
-    ESP = " "
-    diamond = ""
+    if largeur < 1 or largeur % 2 == 0:
+        raise ValueError("La largeur doit être un nombre impair positif.")
+    if not motif:
+        raise ValueError("Le motif ne peut pas être vide.")
+
+    lignes = []
+    # Partie supérieure
     for i in range(1, largeur + 1, 2):
-        diamond += f"{ESP * ((largeur - i) // 2)}{motif * i}\n"
+        lignes.append(f"{' ' * ((largeur - i) // 2)}{motif * i}")
+    # Partie inférieure
+    for i in range(largeur - 2, 0, -2):
+        lignes.append(f"{' ' * ((largeur - i) // 2)}{motif * i}")
 
-    for i in range(largeur - 3, -1, -2):
-        diamond += f"{ESP * ((largeur - i) // 2)}{motif * i}\n"
-
-    return diamond
+    return "\n".join(lignes)
 
 
 if __name__ == "__main__":
-    print(create_diamond("*", 22))
+    print(create_diamond("*", 23))

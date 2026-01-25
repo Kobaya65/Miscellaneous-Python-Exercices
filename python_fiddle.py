@@ -275,7 +275,26 @@ def check_char(string: str) -> str:
     return "Valid" if (string[0] == string[-1]) else "Invalid"
 
 
+def create_diamond(motif: str, largeur: int) -> str:
+    """Build a diamond with a given character and a given size.
+
+    Args:
+        motif (str): character
+        largeur (int): width of the diamond
+
+    Returns:
+        str: the diamond as a string
+    """
+    ESP = " "
+    diamond = ""
+    for i in range(1, largeur + 1, 2):
+        diamond += f"{ESP * ((largeur - i) // 2)}{motif * i}\n"
+
+    for i in range(largeur - 3, -1, -2):
+        diamond += f"{ESP * ((largeur - i) // 2)}{motif * i}\n"
+
+    return diamond
+
+
 if __name__ == "__main__":
-    print(check_char("abba"))
-    print(check_char("a"))
-    print(check_char("abcd"))
+    print(create_diamond("*", 22))

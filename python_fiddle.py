@@ -277,7 +277,7 @@ def check_char(string: str) -> str:
 
 
 def create_diamond(motif: str, largeur: int) -> str:
-    """Build a diamond with a given character and a given size.
+    """Build a diamond with a given character and a given size which must be an odd number.
 
     Args:
         motif (str): character
@@ -287,9 +287,9 @@ def create_diamond(motif: str, largeur: int) -> str:
         str: the diamond as a string
     """
     if largeur < 1 or largeur % 2 == 0:
-        raise ValueError("La largeur doit être un nombre impair positif.")
+        raise ValueError("The width must be a positive odd number.")
     if not motif:
-        raise ValueError("Le motif ne peut pas être vide.")
+        raise ValueError("The pattern cannot be empty.")
 
     lignes = []
     # Partie supérieure

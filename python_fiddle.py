@@ -275,7 +275,7 @@ def check_char(string: str) -> str:
     return "Valid" if (string[0] == string[-1]) else "Invalid"
 
 
-def create_diamond(motif: str, largeur: int) -> str:
+def diamond(motif: str, largeur: int) -> str:
     """Build a diamond with a given character and a given size which must be an odd number.
 
     Args:
@@ -290,16 +290,16 @@ def create_diamond(motif: str, largeur: int) -> str:
     if not motif:
         raise ValueError("The pattern cannot be empty.")
 
-    lignes = []
+    lignes, ESP = [], " "
     # top of the diamond
     for i in range(1, largeur + 1, 2):
-        lignes.append(f"{' ' * ((largeur - i) // 2)}{motif * i}")
+        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
     # bottom of the diamond
     for i in range(largeur - 2, 0, -2):
-        lignes.append(f"{' ' * ((largeur - i) // 2)}{motif * i}")
+        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
 
     return "\n".join(lignes)
 
 
 if __name__ == "__main__":
-    print(create_diamond("*", 23))
+    print(diamond("*", 23))

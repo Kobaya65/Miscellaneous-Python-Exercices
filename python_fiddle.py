@@ -301,5 +301,21 @@ def diamond(motif: str, largeur: int) -> str:
     return "\n".join(lignes)
 
 
+def has_31_days(month_number: int) -> bool:
+    """Determines whether a given month (represented by its number, 1 for January through 12 for December) has 31 days.
+    Return True if the month has 31 days, and False otherwise.
+    https://python-fiddle.com/challenges/check-month-days
+
+    :param month_number (int): number of the month
+    :return (bool): True if the month has 31 days
+    """
+    import calendar
+    from datetime import datetime
+
+    nb_jours = calendar.monthrange(datetime.today().year, month_number)[1]
+
+    return nb_jours == 31
+
+
 if __name__ == "__main__":
-    print(diamond("*", 23))
+    print(has_31_days(2))

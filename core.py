@@ -8,13 +8,19 @@ def test_environ() -> None:
         "Two": 2,
         "Three": 3,
     }
-    # populate environment variable with the dico    
+    # populate environment variable with the dico
     for key in dico:
-        environ[key] = str(dico[key])
+        environ[f"Test_{key}"] = str(dico[key])
 
-    # get process environment values 
+    # get process environment values
     for idx, key in enumerate(environ, 1):
         print(f"{idx:>3} {key}={environ[key]}")
+
+    print()
+    # get process environment values for only local environnement variables
+    for idx, key in enumerate(environ, 1):
+        if key.startswith("Test_"):
+            print(f"{idx:>3} {key}={environ[key]}")
 
 
 if __name__ == "__main__":

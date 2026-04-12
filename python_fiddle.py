@@ -317,5 +317,33 @@ def has_31_days(month_number: int) -> bool:
     return nb_jours == 31
 
 
+def reverse_vowels(s: str) -> str:
+    """Reverse only the vowels in the input string.
+    https://python-fiddle.com/challenges/reverse-vowels-in-string
+    
+    :param s (str): The input string.
+    :return (str): The string with vowels reversed.
+    """
+    vowels = "aàeéèëiïîoöôuüûyAEIOUY"
+    deb, lon, fin = 0, len(s) - 1, len(s) - 1
+    res = ""
+    while deb <= lon:
+        if s[deb] in vowels:
+            while fin >= 0:
+                if s[fin] in vowels:
+                    # Swap the vowels
+                    res += s[fin]
+                    deb += 1
+                    fin -= 1
+                    break
+                fin -= 1
+        else:
+            res += s[deb]
+            deb += 1
+
+    return res
+
+
+
 if __name__ == "__main__":
-    print(has_31_days(2))
+    print(reverse_vowels("évangile"))

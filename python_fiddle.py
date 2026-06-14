@@ -1,5 +1,7 @@
 """Various python challenges from python-fiddle.com
 """
+from zipfile import ZipFile
+
 def main() -> None:
     """https://python-fiddle.com/?checkpoint=1760713867
     """
@@ -344,6 +346,24 @@ def reverse_vowels(s: str) -> str:
     return res
 
 
+def zip_n_files(*lists) -> None:
+    """Zips an arbitrary number of files.
+
+    :param *lists: the input paths.
+    """
+    with ZipFile("/home/kobaya/Documents/output.zip", mode="w") as zp:
+        for file in lists:
+            zp.write(file)
+
+
+def myzip(*lists) -> list[tuple]:
+    """Zips an arbitrary number of lists together and returns the zipped list.
+
+    :param (*lists): The input lists.
+    :return (list): The zipped list.
+    """
+    return list(zip(*lists))
+
 
 if __name__ == "__main__":
-    print(reverse_vowels("évangile"))
+    print(myzip([1, 2, 3], ['a', 'b', 'c'], [True, False, True]))

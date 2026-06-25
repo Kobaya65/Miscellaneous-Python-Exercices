@@ -20,11 +20,8 @@ def number_to_lcd(number: int) -> str:
     | |  | _| _||_||_ |_   ||_||_|
     |_|  ||_  _|  | _||_|  ||_| _|
 
-    Args:
-        number (int): number to be displayed
-
-    Returns:
-        str: string representation of the number in LCD format
+    :param number: number to be displayed
+    :returns: string representation of the number in LCD format
     """
     # LCD display patterns for each digit (3 rows)
     lcd_patterns = {

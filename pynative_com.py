@@ -2,10 +2,8 @@
 """
 def exercise_1(phrase: str) -> str:
     """Reverse each word of a phrase.
-    Args:
-        phrase (str): phrase to be reversed
-    Returns:
-        str: Reverse phrase
+    :param phrase: phrase to be reversed
+    :returns: Reverse phrase
     """
     mots = phrase.split()
     results = []
@@ -22,10 +20,9 @@ def exercise_3(number_list: list[int]) -> list[int]:
     """Remove items from a list while iterating.
         In this question, you need to remove items from a list during iteration without creating a separate copy of the list.
         Remove numbers greater than 50.
-    Args:
-        number_list (list[int]): liste of numbers to be processed
-    Returns:
-        list[int]: processed list of numbers
+
+    :param number_list: liste of numbers to be processed
+    :returns: processed list of numbers
     """
     return [nombre for nombre in number_list if nombre <= 50]
 
@@ -33,6 +30,9 @@ def exercise_3(number_list: list[int]) -> list[int]:
 def name_and_age(name: str, age : int) -> None:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-1-create-a-function-in-python
     exercise 1
+
+    :param name: The name of the person.
+    :param age: The age of the person.
     """
     print(f"Your name is {name} and you are {age} years old.")
 
@@ -40,6 +40,8 @@ def name_and_age(name: str, age : int) -> None:
 def variable_length_of_arguments(*args) -> None:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-2-create-a-function-in-python-with-variable-length-arguments
     exercise 2
+
+    :param *args: Variable length of arguments.
     """
     for value in args:
         print(value)
@@ -48,6 +50,10 @@ def variable_length_of_arguments(*args) -> None:
 def return_multiple_values_from_a_function(a: int, b: int) -> tuple[int, int]:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-3-create-a-function-in-python-that-returns-multiple-values
     exercise 3
+
+    :param a: The first integer
+    :param b: The second integer
+    :returns: A tuple containing the sum and product of a and b
     """
     return (a + b, a * b)
 
@@ -55,6 +61,9 @@ def return_multiple_values_from_a_function(a: int, b: int) -> tuple[int, int]:
 def show_employee(name: str, salary: int = 9000) -> None:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-4-create-a-function-in-python-with-default-arguments
     exercise 4
+
+    :param name: The name of the employee.
+    :param salary: The salary of the employee.
     """
     print(f"Employee Name: {name}, Salary: {salary}")
 
@@ -66,12 +75,10 @@ def outer_function(a: int, b: int) -> int:
     def inner_function(a: int, b: int) -> int:
         """Addition of a and b.
 
-        Args:
-            a (int): first argument
-            b (int): second ergument
+        :param a: first argument
+        :param b: second ergument
 
-        Returns:
-            int: sum of the arguments
+        :returns: sum of the arguments
         """
         return a + b
 
@@ -81,6 +88,9 @@ def outer_function(a: int, b: int) -> int:
 def sum_of_numbers(number: int) -> int:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-13-write-a-recursive-function-to-calculate-the-factorial
     exercise 6
+
+    :param number: The number to calculate the sum of numbers up to.
+    :returns: The sum of numbers from 1 to the given number.
     """
     if number <= 1:
         return number

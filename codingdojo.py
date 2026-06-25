@@ -4,27 +4,24 @@ def diamond(letter: str) -> str:
     """Build a diamond with letters.
     From https://codingdojo.org/kata/Diamond/
 
-    Args:
-        letter (str): chosen letter
-    Returns:
-        str: the diamond as a string
+    :param letter: chosen letter
+    :returns: the diamond as a string
     """
     def make_row(rang: int, ligne: int) -> str:
         """Build a row where the letter to display will be deduced from ligne.
 
-        Args:
-            rang (int): rank of the letter in the alphabet
-            ligne (int): index of the row and the letter to display
-        Returns:
-            str: the row with the given letter, which is deduced from the line number
+        :param rang: rank of the letter in the alphabet
+        :param ligne: index of the row and the letter to display
+        :returns: the row with the given letter, which is deduced from the line number
         """
-        return f"{" " * (rang - ligne - 1)}{chr(ligne + 65)}{" " * (ligne + ligne - 1)}{chr(ligne + 65)}\n"
+        return (f"{" " * (rang - ligne - 1)}{chr(ligne + 65)}"
+                f"{" " * (ligne + ligne - 1)}{chr(ligne + 65)}\n")
 
     def make_a_row(rang: int) -> str:
         """Build the "A" row.
 
-        Returns:
-            str: the "A" row
+        :param rang: rank of the letter in the alphabet
+        :returns: the "A" row
         """
         return f"{" " * rang}A\n"
 
@@ -54,11 +51,9 @@ def dictionary_replacer(input: str, dico: dict) -> str:
     """Change words surrounded by $ in "input", with the corresponding value from the dictionary.
     https://codingdojo.org/kata/DictionaryReplacer/
 
-    Args:
-        input (str): the string where to replace values
-        dico (dict): dictionary containing terms to be replaced and their corresponding value
-    Returns:
-        str: changed string
+    :param input: the string where to replace values
+    :param dico: dictionary containing terms to be replaced and their corresponding value
+    :returns: changed string
     """
     import re
 
@@ -88,8 +83,7 @@ class Greed():
     def check_pairs(self, die_values: list[int]) -> None:
         """Check if there are three pairs in die_values.
 
-        Args:
-            die_values (list[int]): list of dice values
+        :param die_values: list of dice values
         """
         figures = {}
         for x in die_values:
@@ -110,8 +104,7 @@ class Greed():
         - five-of-a-kind (Multiply Triple Score by 4)
         - six-of-a-kind (Multiply Triple Score by 8)
 
-        Args:
-            die_values (list[int]): list of dice values
+        :param die_values: list of dice values
         """
         for face_value in range(1, 7):
             if die_values.count(face_value) == 3:
@@ -126,10 +119,8 @@ class Greed():
     def score(self, die_values: list[int]) -> dict:
         """Returns throw of die score.
 
-        Args:
-            die_values (list[int]): list of dice values
-        Returns:
-            dict: score or error as a dictionary
+        :param die_values: list of dice values
+        :returns: score or error as a dictionary
         """
         self.__total_bonus["Throw"] = die_values
         self.__total_bonus["Scores"] = {}
@@ -160,6 +151,7 @@ class Greed():
         self.check_pairs(die_values)
 
         return self.__total_bonus
+
 
 def test_class_greed() -> None:
     """The only purpose of this function is to test the Greed() class."""    
@@ -225,10 +217,8 @@ def leap_year(year: int) -> bool:
     - all years not divisible by 4 are NOT leap years (e.g. 2017, 2018, 2019),
     - years divisible by 4000 are NOT leap years.
 
-    Args:
-        year (int): year
-    Returns:
-        bool: Return True if year is a leap year else False
+    :param year: year
+    :returns: Return True if year is a leap year else False
     """
     if not isinstance(year, int):
         raise TypeError("year MUST be a whole number.")

@@ -7,7 +7,9 @@ def diamond(letter: str) -> str:
     :param letter: chosen letter
     :returns: the diamond as a string
     """
-    def make_row(rang: int, ligne: int) -> str:
+    def make_row(rang: int,
+                 ligne: int
+                 ) -> str:
         """Build a row where the letter to display will be deduced from ligne.
 
         :param rang: rank of the letter in the alphabet
@@ -48,7 +50,9 @@ def diamond(letter: str) -> str:
     return solution
 
 
-def diamond_bis(motif: str, largeur: int) -> str:
+def diamond_bis(motif: str,
+                largeur: int
+                ) -> str:
     """Build a diamond with a given character and a given size
     which must be an odd number.
     Inspired from https://codingdojo.org/kata/Diamond/.
@@ -73,7 +77,9 @@ def diamond_bis(motif: str, largeur: int) -> str:
     return "\n".join(lignes)
 
 
-def dictionary_replacer(input: str, dico: dict) -> str:
+def dictionary_replacer(input: str,
+                        dico: dict
+                        ) -> str:
     """Change words surrounded by $ in "input", with the corresponding value from the dictionary.
     https://codingdojo.org/kata/DictionaryReplacer/
 

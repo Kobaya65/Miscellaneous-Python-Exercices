@@ -58,6 +58,7 @@ def get_text_in_image() -> None:
 
 
 def main() -> None:
+    "Main function."
     get_text_in_image()
 
 

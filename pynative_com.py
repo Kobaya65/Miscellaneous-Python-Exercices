@@ -27,7 +27,9 @@ def exercise_3(number_list: list[int]) -> list[int]:
     return [nombre for nombre in number_list if nombre <= 50]
 
 
-def name_and_age(name: str, age : int) -> None:
+def name_and_age(name: str,
+                 age : int
+                 ) -> None:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-1-create-a-function-in-python
     exercise 1
 
@@ -47,7 +49,9 @@ def variable_length_of_arguments(*args) -> None:
         print(value)
 
 
-def return_multiple_values_from_a_function(a: int, b: int) -> tuple[int, int]:
+def return_multiple_values_from_a_function(a: int,
+                                           b: int
+                                           ) -> tuple[int, int]:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-3-create-a-function-in-python-that-returns-multiple-values
     exercise 3
 
@@ -58,7 +62,9 @@ def return_multiple_values_from_a_function(a: int, b: int) -> tuple[int, int]:
     return (a + b, a * b)
 
 
-def show_employee(name: str, salary: int = 9000) -> None:
+def show_employee(name: str,
+                  salary: int = 9000
+                  ) -> None:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-4-create-a-function-in-python-with-default-arguments
     exercise 4
 
@@ -68,11 +74,15 @@ def show_employee(name: str, salary: int = 9000) -> None:
     print(f"Employee Name: {name}, Salary: {salary}")
 
 
-def outer_function(a: int, b: int) -> int:
+def outer_function(a: int,
+                   b: int
+                   ) -> int:
     """https://pynative.com/python-functions-exercise-with-solutions/#h-exercise-5-create-an-inner-function-in-python
     exercise 5
     """
-    def inner_function(a: int, b: int) -> int:
+    def inner_function(a: int,
+                       b: int
+                       ) -> int:
         """Addition of a and b.
 
         :param a: first argument
@@ -126,8 +136,8 @@ def python_dictionary_exercise_with_solutions() -> None:
     for x in my_dict:
         print(f"{x}: {my_dict[x]}")
     
-    print(f"Does 'age' exist: {my_dict["age"] is not None}")
-    print(f"Does 'age' exist: {"age" in my_dict}")
+    print(f"Does 'age' exist: {my_dict['age'] is not None}")
+    print(f"Does 'age' exist: {'age' in my_dict}")
 
     # exercise 3
     keys = ['Ten', 'Twenty', 'Thirty']

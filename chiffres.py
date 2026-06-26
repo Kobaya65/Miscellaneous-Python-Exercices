@@ -13,7 +13,9 @@ def entiers_multiples() -> None:
     print(result)
 
 
-def number_to_lcd(number: int, thousand_separator: bool = False) -> str:
+def number_to_lcd(number: int,
+                  thousand_separator: bool = False
+                  ) -> str:
     """From https://codingdojo.org/kata/NumberToLCD.
 
     Displays a number like on a LCD screen, 
@@ -31,7 +33,18 @@ def number_to_lcd(number: int, thousand_separator: bool = False) -> str:
     | |  | _| _||_||_ |_   ||_||_|
     |_|  ||_  _|  | _||_|  ||_| _|
     """
-    def add_thousand_separator(pos: int, len_number: int) -> str:
+    def add_thousand_separator(pos: int,
+                               len_number: int,
+                               thousand_separator: bool
+                               ) -> str:
+        """Adds a thousand separator if needed.
+
+        :param pos: position of figure
+        :param len_number: len of the number
+        :param thousand_separator: displays numbers with a
+        thousand separator if True, default is False
+        :returns: the separator, as three spaces, or an empty string
+        """
         if pos and ((len_number - pos) % 3) == 0 and thousand_separator:
             return "   "
         return ""
@@ -59,7 +72,7 @@ def number_to_lcd(number: int, thousand_separator: bool = False) -> str:
     for row in range(3):
         line = ""
         for pos, digit in enumerate(number_str):
-            line += add_thousand_separator(pos, len_number)
+            line += add_thousand_separator(pos, len_number, thousand_separator)
             line += f"{lcd_patterns[int(digit)][row]}"
         result.append(line)
 

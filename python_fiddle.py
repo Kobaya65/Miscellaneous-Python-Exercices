@@ -29,7 +29,9 @@ def add(*args) -> float | int:
     return somme
 
 
-def find_substring(strings: list[str], substring: str) -> bool:
+def find_substring(strings: list[str],
+                   substring: str
+                   ) -> bool:
     """Check if a substring is present in any string within a list.
     https://python-fiddle.com/challenges/check-substring-in-list
 
@@ -98,7 +100,9 @@ def create_csv_file() -> None:
     del csv
 
 
-def extract_column_from_csv(file_path: str, column_names: list[str]) -> list[dict]:
+def extract_column_from_csv(file_path: str,
+                            column_names: list[str]
+                            ) -> list[dict]:
     """https://python-fiddle.com/challenges/csv-dict
 
     :param file_path: The path to the CSV file
@@ -197,7 +201,9 @@ def check_integer(text: str) -> bool:
     return res 
 
 
-def opposite_signs(x: int, y: int) -> bool:
+def opposite_signs(x: int,
+                   y: int
+                   ) -> bool:
     """Check if two integers have opposite signs.
     https://python-fiddle.com/challenges/check-opposite-signs
 
@@ -228,7 +234,10 @@ def is_perfect_square(n: int) -> bool:
     return False
 
 
-def convert_list_dictionary(l1: list, l2: list, l3: list) -> list[dict]:
+def convert_list_dictionary(l1: list,
+                            l2: list,
+                            l3: list
+                            ) -> list[dict]:
     """Convert three lists into a list of nested dictionaries.
     https://python-fiddle.com/challenges/convert-lists-to-nested-dictionary
 

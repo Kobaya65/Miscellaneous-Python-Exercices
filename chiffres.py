@@ -13,17 +13,32 @@ def entiers_multiples() -> None:
     print(result)
 
 
-def number_to_lcd(number: int) -> str:
-    """Displays a number like on a lcd screen.
-    From https://codingdojo.org/kata/NumberToLCD.
+def number_to_lcd(number: int, thousand_separator: bool = False) -> str:
+    """From https://codingdojo.org/kata/NumberToLCD.
+
+    Displays a number like on a LCD screen, 
+    eventually with a thousand separator.
+
+    A figure is made of three rows of signs.
+
+    :param number: number to be displayed
+    :param thousand_separator: displays numbers with a
+    thousand separator if True, default is False
+    :returns: a string representation of the number in LCD format
+    
+    Figures will be represented as follows:
      _     _  _     _  _  _  _  _ 
     | |  | _| _||_||_ |_   ||_||_|
     |_|  ||_  _|  | _||_|  ||_| _|
-
-    :param number: number to be displayed
-    :returns: string representation of the number in LCD format
     """
+    def add_thousand_separator(pos: int, len_number: int) -> str:
+        if pos and ((len_number - pos) % 3) == 0 and thousand_separator:
+            return "   "
+        return ""
+
     # LCD display patterns for each digit (3 rows)
+    # first element of each item is the top row,
+    # second is the middle row, third is the bottom row
     lcd_patterns = {
         0: [" _ ", "| |", "|_|"],
         1: ["   ", "  |", "  |"],
@@ -36,18 +51,24 @@ def number_to_lcd(number: int) -> str:
         8: [" _ ", "|_|", "|_|"],
         9: [" _ ", "|_|", " _|"],
     }
-    
+
     # Handle negative numbers
     number_str = str(abs(number))
+    len_number = len(number_str)
     result = []
-
     for row in range(3):
-        line = "".join(lcd_patterns[int(digit)][row] for digit in number_str)
+        line = ""
+        for pos, digit in enumerate(number_str):
+            line += add_thousand_separator(pos, len_number)
+            line += f"{lcd_patterns[int(digit)][row]}"
         result.append(line)
+
     result.append("\n")
 
     return "\n".join(result)
 
 
 if __name__ == "__main__":
-    print(number_to_lcd(5168937425))
+    nombre = "1234568790123456"
+    for n in range(4, len(nombre) + 1):
+        print(number_to_lcd(int(nombre[:n]), True))

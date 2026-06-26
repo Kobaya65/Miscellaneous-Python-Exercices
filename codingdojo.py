@@ -47,6 +47,32 @@ def diamond(letter: str) -> str:
 
     return solution
 
+
+def diamond_bis(motif: str, largeur: int) -> str:
+    """Build a diamond with a given character and a given size
+    which must be an odd number.
+    Inspired from https://codingdojo.org/kata/Diamond/.
+
+    :param motif: character
+    :param largeur: width of the diamond
+    :returns: the diamond as a string
+    """
+    if largeur < 1 or largeur % 2 == 0:
+        raise ValueError("The width must be a positive odd number.")
+    if not motif:
+        raise ValueError("The pattern cannot be empty.")
+
+    lignes, ESP = [], " "
+    # top of the diamond
+    for i in range(1, largeur + 1, 2):
+        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
+    # bottom of the diamond
+    for i in range(largeur - 2, 0, -2):
+        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
+
+    return "\n".join(lignes)
+
+
 def dictionary_replacer(input: str, dico: dict) -> str:
     """Change words surrounded by $ in "input", with the corresponding value from the dictionary.
     https://codingdojo.org/kata/DictionaryReplacer/
@@ -231,4 +257,4 @@ def leap_year(year: int) -> bool:
 
 
 if __name__ == "__main__":
-    print(diamond("mm"))
+    print(diamond("m"))

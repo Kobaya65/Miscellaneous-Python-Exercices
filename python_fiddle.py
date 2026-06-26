@@ -253,29 +253,6 @@ def check_char(string: str) -> str:
     return "Valid" if (string[0] == string[-1]) else "Invalid"
 
 
-def diamond(motif: str, largeur: int) -> str:
-    """Build a diamond with a given character and a given size which must be an odd number.
-
-    :param motif: character
-    :param largeur: width of the diamond
-    :returns: the diamond as a string
-    """
-    if largeur < 1 or largeur % 2 == 0:
-        raise ValueError("The width must be a positive odd number.")
-    if not motif:
-        raise ValueError("The pattern cannot be empty.")
-
-    lignes, ESP = [], " "
-    # top of the diamond
-    for i in range(1, largeur + 1, 2):
-        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
-    # bottom of the diamond
-    for i in range(largeur - 2, 0, -2):
-        lignes.append(f"{ESP * ((largeur - i) // 2)}{motif * i}")
-
-    return "\n".join(lignes)
-
-
 def has_31_days(month_number: int) -> bool:
     """Determines whether a given month (represented by its number, 1 for January through 12 for December) has 31 days.
     Return True if the month has 31 days, and False otherwise.
@@ -329,14 +306,15 @@ def zip_n_files(*lists) -> None:
             zp.write(file)
 
 
-def myzip(*lists) -> list[tuple]:
+def zip_lists(*lists) -> list[tuple]:
     """Zips an arbitrary number of lists together and returns the zipped list.
 
-    :param (*lists): The input lists.
-    :return (list): The zipped list.
+    :param: The input lists.
+    :returns: The zipped list.
     """
     return list(zip(*lists))
 
 
 if __name__ == "__main__":
-    print(myzip([1, 2, 3], ['a', 'b', 'c'], [True, False, True]))
+    print(zip_lists([1, 2, 3], ['a', 'b', 'c'], [True, False, True]))
+    print(zip_lists([1, 2, 3], ['a', 'b', 'c'], [True, False]))

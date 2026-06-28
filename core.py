@@ -13,7 +13,7 @@ from json import dumps, loads
 import locale
 from logging import Logger, Formatter, StreamHandler, getLogger, INFO, DEBUG
 from math import prod
-from os import environ, stat, scandir, mkdir, getlogin, remove, walk
+from os import environ, stat, scandir, getlogin, remove, walk
 from os.path import exists, dirname, realpath, expanduser, join
 from pathlib import Path
 from pprint import pprint
@@ -21,7 +21,7 @@ import secrets
 from shutil import register_unpack_format, unpack_archive
 import string
 import time
-from sys import exit, stderr
+from sys import stderr
 import textwrap
 from typing import Any
 import xml.etree.ElementTree as ET
@@ -48,20 +48,19 @@ def test_7z() -> None:
         """Formats registration must happen only once in a program.
         """
         try:
-            
-            # reading zip
             register_unpack_format("7zip_custom", [".7z"], unpack_7zarchive)
         except ValueError:
             print("7z format already registered.")
-    
 
     home = Path.home()
     file = Path(rf"{home}/Documents/test_7z.7z")
 
-    extrac_dir = rf"{home}\Documents\test_7z_extracted"
-    build_path(extrac_dir, is_last_item_file=False)
+    extrac_dir = rf"{home}/Documents/test_7z_extracted"
+    # create the directory if it doesn't exist
+    Path(extrac_dir).mkdir(parents=True, exist_ok=True)
     ensure_7z_registered()
     try:
+        # reading zip
         unpack_archive(file, extrac_dir)
     except FileNotFoundError as e:
         print(f"Error: {e}")
@@ -72,30 +71,6 @@ def test_7z() -> None:
     except Exception as e:
         print(f"{e}\nProblem while extracting flie(s) from archive.")
         raise
-
-
-def build_path(path: str, is_last_item_file: bool = False) -> bool:
-    """Build a path, creating directories as needed.
-
-    :param path: The path to build.
-    :param is_last_item_file: If True, the last item in the path is treated as a file.
-    :returns: True if the path was created successfully, False otherwise.
-    """
-    create = False
-    path_splitted = path.split("/")
-    if is_last_item_file:
-        path_splitted = path_splitted[:-1]
-    complete_path = ""
-    for subf in path_splitted:
-        complete_path = join(complete_path, subf)
-        if not exists(complete_path):
-            try:
-                mkdir(complete_path)
-                create = True
-            except Exception as e:
-                print(f"Error creating directory {complete_path}: {e}")
-
-    return create
 
 
 def test_environ() -> None:
@@ -257,4 +232,4 @@ def compute_duration(logger: Logger,
 
 
 if __name__ == "__main__":
-    make_constant()
+    test_7z()

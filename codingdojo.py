@@ -97,6 +97,7 @@ def dictionary_replacer(input: str,
 
     return res
 
+
 class Greed():
     """Greed is a dice game.
     https://codingdojo.org/kata/Greed/
@@ -238,6 +239,7 @@ def test_class_greed() -> None:
     print(f"more than 6 die\n{d1}")
 
     del greed
+
 
 def leap_year(year: int) -> bool:
     """Checks if a given year is leap or not.

@@ -449,8 +449,15 @@ def test_tqdm() -> None:
 
 def test_rich() -> None:
     """Writing rich text to the terminal."""
-    print(Panel.fit("[bold yellow]Hi, I'm a Panel", border_style="green"))
-    print(Panel.fit("[italic red]Hi[/italic red], [italic blue]I'm another Panel[/italic blue]"))
+    print(Panel.fit("[bold yellow]Hi, I'm a Panel",
+                    border_style="green"))
+    print(Panel.fit(
+        "[italic red]Hi[/italic red], [italic blue]"
+        "I'm another Panel[/italic blue]",
+        border_style="red",
+        box=SQUARE)
+    )
+    print(Panel.fit("With figures:\n1\n2\n3\n4\n5"))
 
 
 def read_json() -> None:
@@ -480,5 +487,83 @@ def read_json() -> None:
         print(f"Error reading JSON with orient='records': {e}")
 
 
+def test_zipfile() -> None:
+    """Test unpacking a zip file."""
+    file = Path("~/Documents/Data.zip").expanduser()
+    if not file.exists():
+        print(f"File {file} does not exist.")
+        return
+
+    mkdir_path = file.parent / "extracted_zip"
+    mkdir_path.mkdir(exist_ok=True)
+
+    try:
+        with ZipFile(file, 'r') as zip_ref:
+            zip_ref.extractall(mkdir_path)
+            print(f"Extracted files from {file} to {mkdir_path}")
+    except Exception as e:
+        print(f"Error extracting zip file: {e}")
+
+
+def test_logger() -> None:
+    """Function to show how to set up a simple
+    logger over multiple modules."""
+    import test_logger_module_1
+    import test_logger_module_2
+    import test_logger_module_3
+
+    def setup_logger() -> Logger:
+        """Logger setting up."""
+        logger = getLogger("TestLoggerIn_test_core")
+        if not logger.handlers:
+            logger.setLevel(INFO)
+            handler = StreamHandler()
+            formatter = Formatter("[%(name)-30s] %(asctime)s - %(name)s - %(levelname)s - %(message)s")
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+            # Prevent log messages from being propagated to the root logger
+            logger.propagate = False
+
+        return logger
+
+    logger = setup_logger()
+
+    logger.info("Début du processus.")
+    test_logger_module_1.fonction_1()
+    test_logger_module_2.fonction_2()
+    test_logger_module_3.fonction_3()
+    logger.info("Fin du processus.")
+
+
+def test_calendar() -> None:
+    """Testing calendar module.
+    Usefull to know how many days tere are in a given month.
+    """
+    month_table = {
+        "January": "Janvier",
+        "February": "Février",
+        "March": "Mars",
+        "April": "Avril",
+        "May": "Mai",
+        "June": "Juin",
+        "July": "Juillet",
+        "August": "Août",
+        "September": "Septembre",
+        "October": "Octobre",
+        "November": "Novembre",
+        "December": "Décembre"
+    }
+    year = dt.today().year
+    for i in range(1, 13):
+        nb_jours = calendar.monthrange(year, i)
+        print(f"{month_table[calendar.month_name[i]]} {str(year):<15}{nb_jours[1]}")
+
+    cal = calendar.TextCalendar(calendar.MONDAY)
+    print()
+    calendar.TextCalendar.prmonth(cal, theyear=year, themonth=dt.today().month)
+    print()
+    calendar.TextCalendar.prmonth(cal, theyear=2026, themonth=12)
+
+
 if __name__ == "__main__":
-    read_json()
+    test_calendar()

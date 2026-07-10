@@ -17,12 +17,13 @@ from os import environ, stat, scandir, getlogin, remove, walk
 from os.path import exists, dirname, realpath, expanduser, join
 from pathlib import Path
 from pprint import pprint
+from re import match
 import secrets
 from shutil import register_unpack_format, unpack_archive
 import string
-import time
 from sys import stderr
 import textwrap
+import time
 from typing import Any
 import xml.etree.ElementTree as ET
 from zipfile import ZipFile
@@ -209,7 +210,7 @@ def compute_duration(logger: Logger,
                      ) -> None:
     """Compute the duration of a process (function or a block of code).
     Log info in the form "Duration : 1m 14s 31ms".
-    
+
     :param logger: Logger object to log the duration
     :param measure_name: Name of the process being measured
     :param started_time: Start time of the process
@@ -228,8 +229,256 @@ def compute_duration(logger: Logger,
         parts.append(f"{int(minutes)}m")
     parts.append(f"{seconds_int}s {ms}ms")
 
-    logger.info(f"[{measure_name.upper():<7}] Duration: {" ".join(parts)}") 
+    logger.info(f"[{measure_name.upper():<7}] Duration: {" ".join(parts)}")
+
+
+def is_valid_email(mail: str) -> None:
+    """How to validate astring a valid email.
+
+    :param mail: email to check
+    :returns: True if mail is valid otherwise false
+    """
+    adresse_ok = match(
+        r"^[^@%§! #$^&*=()[\]<>;/\"?]+@[a-zA-Z0-9-]+\.[a-zA-Z-.]{2,}$",
+        mail
+    )
+
+    return bool(adresse_ok)
+
+
+def test_is_valid_email() -> None:
+    """Function to test is_valid_email()."""
+    adresses = [
+        "christian_martin@gmail.com",
+        "JaiOublieLarobasegmail.com",
+        "MarieHutchinson03523@yahoo.co.uk"
+        "UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com",
+        "ceciNestPasUneAdresseMail",
+        "adresse mail.invalide@test.com",
+        "addres?invalid@socgen.com"
+    ]
+
+    for a in adresses:
+        print(f"{a} is {'valid' if is_valid_email(a) else 'invalid'}.")
+        # should obtain:
+        # christian_martin@gmail.com is valid",
+        # JaiOublieLarobasegmail.com is invalid
+        # MarieHutchinson03523@yahoo.co.uk is valid
+        # UnEaDreSSeMail!38BIZarre@unSiTeBizarre.com"is invalid
+        # ceciNestPasUneAdresseMail" is invalid
+        # adresse mail.invalide@test.com"is invalid
+        # addres?invalid@socgen.com is invalid
+
+
+def time_zone(string_date: str) -> dt:
+    """Get localized time.
+
+    :param string_date: date as a string
+        with format "%a %b %d %H:%M:%S %Y %Z"
+        e.g."Thu Jun 13 16:37:57: 2024 CEST"\n
+    :returns localized time from Time zone name
+    """
+    timezones = defaultdict(list)
+    for name in common_timezones:
+        timezone = dtz.gettz(name)
+        try:
+            now = dt.now(timezone)
+        except ValueError:
+            continue
+        abbrev = now.strftime("%Z")
+        timezones[abbrev].append(name)
+
+    date_string, tz_string = string_date.rsplit(" ", 1)
+    date = dt.strptime(date_string, "%a %b %d %h:%M:%S %Y")
+    tz = tze(timezone[tz_string][5])
+    return tz.localize(date)
+
+
+def filter_dictionary() -> None:
+    """How to filter a dictionary with dictionary comprehension,
+    like we did for a list.
+    """
+    objet = {
+        "car01": 1,
+        "car02": 2,
+        "car03": 3,
+        "plane01": 5,
+        "plane02": 6,
+        "plane03": 7,
+    }
+    result = {key: value for key, value in objet.itemes() if key.startswith("car")}
+
+
+def remove_accents(input_str: str) -> str:
+    """Remove accents fro many character in input_str.
+
+    :param input_str: string in which to replace accented characters
+    :returns input_str without accented characters
+    """
+    return unidecode(input_str)
+
+
+def inverted_index() -> None:
+    """https://pynative.com/intermediate-python-exercises/
+    Exercise 12: Inverted __index__
+    Practice Problem: create a fucntion that "inverts" a dictionary.
+    Convert a dictionary of Author: [List of books] into a dictionary of Book: Author.
+    This is the logic behind ho wsearch engines work! An inverted Index allows you
+    to search for a term (the book) and immediately find where it belongs (the author).
+    It emphasizes the use of nested loops and dictionary assignment.
+    """
+    def invert_dict(dico: dict) -> dict:
+        """Inverts a dictionary : switch key and value.
+
+        :param dico : dictionary to invert_dict
+        :return the inverted dictinary
+        """
+        inverse_dict = []
+        for auteur, titres in dico.iteritems():
+            for titre in titres:
+                inverse_dict[titre] = auteur
+
+        return inverse_dict
+
+    given_input = {
+        "Orwell": ["1984", "Animal Farm"],
+        "Huxley": ["Brave New World"]
+    }
+
+    print(given_input)
+    print(invert_dict((given_input)))
+
+
+def test_closure() -> None:
+    """From https://www.geeksforgeeks.org/python/python-closures/.
+    """
+    def make_counter() -> Callable:
+        """Outer function which will remember value.
+
+        :returns last value of the function
+        """
+        # this variable will be remembered
+        count = 0
+        def counter() -> int:
+            """The "real" function."""
+            # modify outer variable
+            nonlocal count
+            count = 1
+            return count
+
+    counter1 = make_counter()
+    print(counter1())
+    print(counter1())
+    print(counter1())
+    print(counter1())
+
+
+def use_decorator() -> None:
+    """From https://www.geeksforgeeks.org/python/decorators-in-python/."""
+    def decorator(func: Any) -> Any:
+        """A decorator."""
+        def wrapper() -> Any:
+            """The wrapper."""
+            print("Before calling the function.")
+            func()
+            print("After calling the function.")
+        return wrapper
+
+    def greet_1() -> None:
+        """Function 1."""
+        print("Hello, World!")
+    greet_1()
+
+    # applying the decorator to a function
+    @decorator
+    def greet_2() -> None:
+        """Function 2."""
+        print("Hello, World!")
+
+    greet_2()
+
+
+def use_numpy_arrays() -> None:
+    """From https://www.geeksforgeeks.org/python/python-arrays/.
+    """
+    seq_array = np.arange(12).reshape(3, 4)
+    rng = np.random.default_rng(0)
+    random_array_1 = rng.integers(1, 100)
+    random_array_2 = rng.integers(1, 100, size=(3, 4))
+    print("seq_array")
+    print(seq_array)
+    print("random_array_1")
+    print(random_array_1)
+    print("random_array_2")
+    print(random_array_2)
+
+    a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print("a")
+    print(a)
+
+
+def arrondis()-> None:
+    """How to round decimals correctly with python."""
+    val = 2.6754
+
+    print(f"Le chiffre de référence est {val}.\n")
+    print("Avec round()")
+    print(round(val, 2))
+
+    print("\nAvec Decimal()")
+    # use a chain to avoid binary errors
+    x = Decimal(str(val))
+    print("Three decimals")
+    print(x.quantize(Decimal("0.000"), rounding=ROUND_HALF_UP))
+
+    print("Two decimals")
+    print(x.quantize(Decimal("0.00"), rounding=ROUND_HALF_UP))
+
+    print("One decimal")
+    print(x.quantize(Decimal("0.0"), rounding=ROUND_HALF_UP))
+
+
+def test_tqdm() -> None:
+    """Testing tqdm library.
+    Shows a smart progress meter in any console or GUI.
+    """
+    for _ in tqdm(range(50)):
+        # simule une tâche longue
+        time.sleep(0.1)
+
+
+def test_rich() -> None:
+    """Writing rich text to the terminal."""
+    print(Panel.fit("[bold yellow]Hi, I'm a Panel", border_style="green"))
+    print(Panel.fit("[italic red]Hi[/italic red], [italic blue]I'm another Panel[/italic blue]"))
+
+
+def read_json() -> None:
+    """Read a JSON file and print its content."""
+    un_onglet_path = Path("~/.config/window_positions/window_positions_1_onglet_nemo.json").expanduser()
+    if not un_onglet_path.exists():
+        print(f"File {un_onglet_path} does not exist.")
+        return
+
+    try:
+        data = pd.read_json(un_onglet_path, orient="records")
+        print(data)
+        data.to_excel("window_positions_records_1_onglet.ods", engine="odf", index=False)
+    except Exception as e:
+        print(f"Error reading JSON with orient='records': {e}")
+
+    deux_onglets_path = Path("~/.config/window_positions/window_positions_2_onglet_nemo.json").expanduser()
+    if not deux_onglets_path.exists():
+        print(f"File {deux_onglets_path} does not exist.")
+        return
+
+    try:
+        data = pd.read_json(deux_onglets_path, orient="records")
+        print(data)
+        data.to_excel("window_positions_records_2_onglets.ods", engine="odf", index=False)
+    except Exception as e:
+        print(f"Error reading JSON with orient='records': {e}")
 
 
 if __name__ == "__main__":
-    test_7z()
+    read_json()

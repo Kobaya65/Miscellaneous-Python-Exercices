@@ -7,10 +7,7 @@ from datetime import datetime as dt
 import dateutil.tz as dtz
 from decimal import Decimal, ROUND_HALF_UP
 from getpass import getpass
-import heapq as hq
-from html import entities as he
 from json import dumps, loads
-import locale
 from logging import Logger, Formatter, StreamHandler, getLogger, INFO, DEBUG
 from math import prod
 from os import environ, stat, scandir, getlogin, remove, walk
@@ -18,11 +15,7 @@ from os.path import exists, dirname, realpath, expanduser, join
 from pathlib import Path
 from pprint import pprint
 from re import match
-import secrets
 from shutil import register_unpack_format, unpack_archive
-import string
-from sys import stderr
-import textwrap
 import time
 from typing import Any
 import xml.etree.ElementTree as ET
@@ -115,7 +108,7 @@ class Student(object):
 
     @classmethod
     def change_school(cls, name: str) -> None:
-        """Change the school name  for all instances of the class.
+        """Change the school name for all instances of the class.
 
         :param name: New school name
         """
@@ -232,7 +225,7 @@ def compute_duration(logger: Logger,
     logger.info(f"[{measure_name.upper():<7}] Duration: {" ".join(parts)}")
 
 
-def is_valid_email(mail: str) -> None:
+def is_valid_email(mail: str) -> bool:
     """How to validate astring a valid email.
 
     :param mail: email to check
@@ -306,7 +299,7 @@ def filter_dictionary() -> None:
         "plane02": 6,
         "plane03": 7,
     }
-    result = {key: value for key, value in objet.itemes() if key.startswith("car")}
+    result = {key: value for key, value in objet.items() if key.startswith("car")}
 
 
 def remove_accents(input_str: str) -> str:
@@ -388,6 +381,8 @@ def use_decorator() -> None:
         """Function 1."""
         print("Hello, World!")
     greet_1()
+
+    print()
 
     # applying the decorator to a function
     @decorator
@@ -503,6 +498,7 @@ def test_zipfile() -> None:
             print(f"Extracted files from {file} to {mkdir_path}")
     except Exception as e:
         print(f"Error extracting zip file: {e}")
+        raise
 
 
 def test_logger() -> None:

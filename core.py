@@ -112,6 +112,7 @@ class Student(object):
 
         :param name: New school name
         """
+        cls.school_name = name
 
     @staticmethod
     def find_notes(subject_name: str) -> list[str]:
@@ -268,7 +269,7 @@ def time_zone(string_date: str) -> dt:
 
     :param string_date: date as a string
         with format "%a %b %d %H:%M:%S %Y %Z"
-        e.g."Thu Jun 13 16:37:57: 2024 CEST"\n
+        e.g."Thu Jun 13 16:37:57 2024 CEST"\n
     :returns localized time from Time zone name
     """
     timezones = defaultdict(list)
@@ -282,8 +283,8 @@ def time_zone(string_date: str) -> dt:
         timezones[abbrev].append(name)
 
     date_string, tz_string = string_date.rsplit(" ", 1)
-    date = dt.strptime(date_string, "%a %b %d %h:%M:%S %Y")
-    tz = tze(timezone[tz_string][5])
+    date = dt.strptime(date_string, "%a %b %d %H:%M:%S %Y")
+    tz = tze(timezones[tz_string][5])
     return tz.localize(date)
 
 
@@ -300,6 +301,7 @@ def filter_dictionary() -> None:
         "plane03": 7,
     }
     result = {key: value for key, value in objet.items() if key.startswith("car")}
+    print(result)
 
 
 def remove_accents(input_str: str) -> str:
@@ -326,8 +328,8 @@ def inverted_index() -> None:
         :param dico : dictionary to invert_dict
         :return the inverted dictinary
         """
-        inverse_dict = []
-        for auteur, titres in dico.iteritems():
+        inverse_dict = {}
+        for auteur, titres in dico.items():
             for titre in titres:
                 inverse_dict[titre] = auteur
 
@@ -562,4 +564,4 @@ def test_calendar() -> None:
 
 
 if __name__ == "__main__":
-    test_calendar()
+    print(time_zone("Thu Jun 13 16:37:57 2024 CEST"))

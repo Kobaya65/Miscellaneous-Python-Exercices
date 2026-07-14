@@ -564,4 +564,4 @@ def test_calendar() -> None:
 
 
 if __name__ == "__main__":
-    print(time_zone("Thu Jun 13 16:37:57 2024 CEST"))
+    test_logger()

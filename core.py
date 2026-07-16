@@ -1,24 +1,18 @@
 """Module for testing miscellaneous functions."""
 import calendar
-from collections import Counter, defaultdict
+from collections import defaultdict
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime as dt
 import dateutil.tz as dtz
 from decimal import Decimal, ROUND_HALF_UP
-from getpass import getpass
-from json import dumps, loads
 from logging import Logger, Formatter, StreamHandler, getLogger, INFO, DEBUG
-from math import prod
-from os import environ, stat, scandir, getlogin, remove, walk
-from os.path import exists, dirname, realpath, expanduser, join
+from os import environ
 from pathlib import Path
-from pprint import pprint
 from re import match
 from shutil import register_unpack_format, unpack_archive
 import time
 from typing import Any
-import xml.etree.ElementTree as ET
 from zipfile import ZipFile
 
 import numpy as np
@@ -30,8 +24,6 @@ from rich.panel import Panel
 from rich.box import SQUARE
 from tqdm import tqdm
 from unidecode import unidecode
-import untangle
-import xmltodict
 
 
 def test_7z() -> None:
@@ -270,7 +262,7 @@ def time_zone(string_date: str) -> dt:
     :param string_date: date as a string
         with format "%a %b %d %H:%M:%S %Y %Z"
         e.g."Thu Jun 13 16:37:57 2024 CEST"\n
-    :returns localized time from Time zone name
+    :returns: localized time from Time zone name
     """
     timezones = defaultdict(list)
     for name in common_timezones:
@@ -305,10 +297,10 @@ def filter_dictionary() -> None:
 
 
 def remove_accents(input_str: str) -> str:
-    """Remove accents fro many character in input_str.
+    """Remove accents from any character in input_str.
 
     :param input_str: string in which to replace accented characters
-    :returns input_str without accented characters
+    :returns: input_str without accented characters
     """
     return unidecode(input_str)
 
@@ -350,7 +342,7 @@ def test_closure() -> None:
     def make_counter() -> Callable:
         """Outer function which will remember value.
 
-        :returns last value of the function
+        :returns: last value of the function
         """
         # this variable will be remembered
         count = 0
@@ -358,8 +350,9 @@ def test_closure() -> None:
             """The "real" function."""
             # modify outer variable
             nonlocal count
-            count = 1
+            count += 1
             return count
+        return counter
 
     counter1 = make_counter()
     print(counter1())
@@ -440,7 +433,7 @@ def test_tqdm() -> None:
     Shows a smart progress meter in any console or GUI.
     """
     for _ in tqdm(range(50)):
-        # simule une tâche longue
+        # simulate a long task
         time.sleep(0.1)
 
 
@@ -458,8 +451,10 @@ def test_rich() -> None:
 
 
 def read_json() -> None:
-    """Read a JSON file and print its content."""
-    un_onglet_path = Path("~/.config/window_positions/window_positions_1_onglet_nemo.json").expanduser()
+    """Read a JSON file, print its content then save it to an Excel file."""
+    un_onglet_path = Path(
+        "~/.config/window_positions/window_positions.json"
+    ).expanduser()
     if not un_onglet_path.exists():
         print(f"File {un_onglet_path} does not exist.")
         return
@@ -467,19 +462,9 @@ def read_json() -> None:
     try:
         data = pd.read_json(un_onglet_path, orient="records")
         print(data)
-        data.to_excel("window_positions_records_1_onglet.ods", engine="odf", index=False)
-    except Exception as e:
-        print(f"Error reading JSON with orient='records': {e}")
-
-    deux_onglets_path = Path("~/.config/window_positions/window_positions_2_onglet_nemo.json").expanduser()
-    if not deux_onglets_path.exists():
-        print(f"File {deux_onglets_path} does not exist.")
-        return
-
-    try:
-        data = pd.read_json(deux_onglets_path, orient="records")
-        print(data)
-        data.to_excel("window_positions_records_2_onglets.ods", engine="odf", index=False)
+        data.to_excel("window_positions.ods",
+                      engine="odf",
+                      index=False)
     except Exception as e:
         print(f"Error reading JSON with orient='records': {e}")
 
@@ -564,4 +549,4 @@ def test_calendar() -> None:
 
 
 if __name__ == "__main__":
-    test_logger()
+    test_closure()

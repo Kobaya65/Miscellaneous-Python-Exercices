@@ -2,8 +2,6 @@
 *.txt
 *.csv
 *.ods
-*.kdev4
-.kdev4/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

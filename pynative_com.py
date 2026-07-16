@@ -18,10 +18,11 @@ def exercise_1(phrase: str) -> str:
 
 def exercise_3(number_list: list[int]) -> list[int]:
     """Remove items from a list while iterating.
-        In this question, you need to remove items from a list during iteration without creating a separate copy of the list.
-        Remove numbers greater than 50.
+    In this question, you need to remove items from a list during iteration
+    without creating a separate copy of the list.
+    Remove numbers greater than 50.
 
-    :param number_list: liste of numbers to be processed
+    :param number_list: list of numbers to be processed
     :returns: processed list of numbers
     """
     return [nombre for nombre in number_list if nombre <= 50]

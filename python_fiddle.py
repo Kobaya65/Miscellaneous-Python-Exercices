@@ -268,7 +268,7 @@ def has_31_days(month_number: int) -> bool:
     https://python-fiddle.com/challenges/check-month-days
 
     :param month_number: The number of the month (1-12)
-    :return: True if the month has 31 days, False otherwise
+    :returns: True if the month has 31 days, False otherwise
     """
     import calendar
     from datetime import datetime
@@ -308,7 +308,7 @@ def reverse_vowels(s: str) -> str:
 def zip_n_files(*lists) -> None:
     """Zips an arbitrary number of files.
 
-    :param *lists: the input paths.
+    :param *lists: the input paths
     """
     with ZipFile("/home/kobaya/Documents/output.zip", mode="w") as zp:
         for file in lists:

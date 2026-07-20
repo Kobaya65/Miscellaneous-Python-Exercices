@@ -18,20 +18,19 @@ def number_to_lcd(number: int,
                   ) -> str:
     """From https://codingdojo.org/kata/NumberToLCD.
 
+    Figures will be represented as follows:
+     _     _  _     _  _  _  _  _ 
+    | |  | _| _||_||_ |_   ||_||_|
+    |_|  ||_  _|  | _||_|  ||_| _|
+
     Displays a number like on a LCD screen, 
     eventually with a thousand separator.
 
     A figure is made of three rows of signs.
 
     :param number: number to be displayed
-    :param thousand_separator: displays numbers with a
-    thousand separator if True, default is False
+    :param thousand_separator: displays numbers with a thousand separator if True, default is False
     :returns: a string representation of the number in LCD format
-    
-    Figures will be represented as follows:
-     _     _  _     _  _  _  _  _ 
-    | |  | _| _||_||_ |_   ||_||_|
-    |_|  ||_  _|  | _||_|  ||_| _|
     """
     def add_thousand_separator(pos: int,
                                len_number: int,
@@ -42,7 +41,7 @@ def number_to_lcd(number: int,
         :param pos: position of figure
         :param len_number: len of the number
         :param thousand_separator: displays numbers with a
-        thousand separator if True, default is False
+        thousand separator if True, defaultS to False
         :returns: the separator, as three spaces, or an empty string
         """
         if pos and ((len_number - pos) % 3) == 0 and thousand_separator:

@@ -1,5 +1,8 @@
 """From https://pynative.com/python-exercises-with-solutions/
 """
+import re
+
+
 def exercise_1(phrase: str) -> str:
     """Reverse each word of a phrase.
     :param phrase: phrase to be reversed
@@ -14,6 +17,124 @@ def exercise_1(phrase: str) -> str:
     result = " ".join(results)
 
     return result
+
+
+def python_regex_exercises() -> None:
+    """https://pynative.com/python-regex-exercises"""
+    print("Exercise 2")
+    test_strings = ["a", "ab", "abb", "abbb", "b", "ba"]
+    for s in test_strings:
+        # print(f"{s:<7} -> {"Match" if re.match(r"^a", s) else "No match"}")
+        print(f"{s:<7} -> {"Match" if re.match(r"ab*", s) else "No match"}")
+    
+    print("\nExercise 3")
+    for s in test_strings:
+        print(f"{s:<7} -> {
+                "Match" if re.match(r"ab+", s) else "No match"
+            }"
+        )
+    
+    print("\nExercise 4")
+    for s in test_strings:
+        print(f"{s:<7} -> {
+                "Match" if re.fullmatch(r"ab?", s) else "No match"
+            }"
+        )
+    
+    print("\nExercise 5")
+    for s in test_strings:
+        print(f"{s:<7} -> {
+                "Match" if re.fullmatch(r"ab{3}", s) else "No match"
+            }"
+        )
+    
+    print("\nExercise 6")
+    for s in test_strings:
+        print(f"{s:<7} -> {
+                "Match" if re.fullmatch(r"ab{2,3}", s) else "No match"
+            }"
+        )
+
+    print("\nExercise 7")
+    test_strings = [
+        "hello_world",
+        "foo_bar",
+        "hello",
+        "hello_",
+        "_world",
+        "Hello_world",
+        "hello_World"
+    ]
+    for s in test_strings:
+        print(f"{s:<12} -> {
+                "Match" if re.fullmatch(r"[a-zA-Z]+_[a-zA-Z]+", s) 
+                else "No match"
+            }"
+        )
+
+    print("\nExercise 8")
+    test_strings = [
+        "Hello",
+        "World",
+        "python",
+        "HELLO",
+        "Hello123",
+        "H",
+        "Ha"
+    ]
+    for s in test_strings:
+        print(f"{s:<12} -> {
+                "Match" if re.fullmatch(r"[A-Z][a-z]+", s) 
+                        else "No match"
+            }"
+        )
+
+    print("\nExercise 9")
+    test_strings = [
+        "a123b",
+        "axyzb",
+        "ab",
+        "a b",
+        "ab ",
+        "b123a",
+        "a123"
+    ]
+    for s in test_strings:
+        print(f"{s:<12} -> {
+                "Match" if re.fullmatch(r"^a.*b$", s) 
+                        else "No match"
+            }"
+        )
+
+    print("\nExercise 10")
+    test_strings = [
+        "Hello world",
+        "Hello",
+        "Say Hello",
+        "hello world",
+        "HelloWorld"
+    ]
+    for s in test_strings:
+        print(f"{s:<12} -> {
+                "Match" if re.fullmatch(r"^Hello\b.*", s) 
+                        else "No match"
+            }"
+        )
+
+    print("\nExercise 11")
+    test_strings = [
+        "I love Python",
+        "Python is great",
+        "I love Python!",
+        "python",
+        "I love Python."
+    ]
+    for s in test_strings:
+        print(f"{s:<15} -> {
+                "Match" if re.fullmatch(r".*Python[.,!?]?$", s) 
+                        else "No match"
+            }"
+        )
 
 
 def exercise_3(number_list: list[int]) -> list[int]:
@@ -149,4 +270,5 @@ def python_dictionary_exercise_with_solutions() -> None:
 
 
 if __name__ == "__main__":
-    python_dictionary_exercise_with_solutions()
+    python_regex_exercises()
+

@@ -2,6 +2,7 @@
 """
 from box import Box
 import json
+from os import getpid, getppid
 import re
 
 
@@ -270,7 +271,7 @@ def python_dictionary_exercise_with_solutions() -> None:
     print(new_dict)
 
 
-def python_json_exercise() -> None:
+def python_json_exercises() -> None:
     """https://pynative.com/python-json-exercise/#h-exercise-1-convert-the-following-dictionary-into-json-format"""
     # exercise 5
     sampleJson = """{ 
@@ -307,5 +308,14 @@ def python_json_exercise() -> None:
     print(vehicle_json)
 
 
+def python_os_sys_exercises() -> None:
+    """https://pynative.com/python-os-sys-module-exercises/"""
+    # exercise 14
+    print("-" * 80)
+    print("pid", getpid())
+    print("-" * 80)
+    print("parent id", getppid())
+
+
 if __name__ == "__main__":
-    python_json_exercise()
+    python_os_sys_exercises()

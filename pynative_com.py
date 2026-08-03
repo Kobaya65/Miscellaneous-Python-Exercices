@@ -1,5 +1,7 @@
 """From https://pynative.com/python-exercises-with-solutions/
 """
+from box import Box
+import json
 import re
 
 
@@ -266,9 +268,44 @@ def python_dictionary_exercise_with_solutions() -> None:
     values = [10, 20, 30]
     new_dict = dict(zip(keys, values))
     print(new_dict)
-    
+
+
+def python_json_exercise() -> None:
+    """https://pynative.com/python-json-exercise/#h-exercise-1-convert-the-following-dictionary-into-json-format"""
+    # exercise 5
+    sampleJson = """{ 
+        "company":{ 
+            "employee":{ 
+                "name":"emma",
+                "payable":{ 
+                    "salary":7000,
+                    "bonus":800
+                }
+            }
+        }
+    }"""
+    sample_json = json.loads(sampleJson)
+    print(" json ".center(80, "-"))
+    print(sample_json["company"]["employee"]["payable"]["salary"])
+
+    print(" Box ".center(80, "-"))
+    sample = Box(sample_json)
+    print(sample.company.employee.payable.salary)
+
+    # exercise 6
+    class Vehicle:
+        def __init__(self, name, engine, price):
+            self.name = name
+            self.engine = engine
+            self.price = price
+
+    vehicle = Vehicle("Toyota Rav4", "2.5L", 32000)
+
+    # Convert it into JSON format
+    vehicle_json = json.dumps(vehicle.__dict__)
+    print("-" * 80)
+    print(vehicle_json)
 
 
 if __name__ == "__main__":
-    python_regex_exercises()
-
+    python_json_exercise()
